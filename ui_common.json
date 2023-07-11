@@ -1,0 +1,2022 @@
+//This JSON was modified by AgentMindStorm (@agentms_) and LukasPAH (@LukasPAH). Please do not use this document without permission.
+{
+  "empty_element": {}, //These empty elements are used to remove inherited properties from existing elements.
+  "empty_button_element": {
+    "type": "button"
+  },
+  "flying_item_renderer": {
+    "property_bag": {
+      "#flying_item_renderer": false
+    }
+  },
+  "highlight_slot": {
+    "alpha": 0.5
+  },
+  "highlight_slot_panel/highlight": {
+    "layer": 11
+  },
+//Category text removal is currently disabled due to upcoming bundle changes.
+//"inventory_icon_panel/hover_text": {
+//  "ignored": true,
+//  "bindings": [
+//    {
+//      "binding_name": "#hover_text",
+//      "binding_name_override": "#text",
+//      "binding_type": "collection",
+//      "binding_collection_name": "$item_collection_name"
+//    },
+//    {
+//      "binding_type": "view",
+//      "source_property_name": "(#text - '\n§9§9craftingScreen.tab.equipment§r' - '\n§9§9craftingScreen.tab.construction§r' - '\n§9§9craftingScreen.tab.nature§r' - '\n§9§9craftingScreen.tab.items§r' - '\n§9§9craftingScreen.tab.commands§r')",
+//      "target_property_name": "#hover_text"
+//    }
+//  ]
+//},
+//"selected_item_details/item_panel_image/item_text_label": {
+//  "text": "#text",
+//  "bindings": [
+//    {
+//      "binding_name": "#selected_hover_text"
+//    },
+//    {
+//      "binding_type": "view",
+//      "source_property_name": "(#selected_hover_text - '\n§9§9craftingScreen.tab.equipment§r' - '\n§9§9craftingScreen.tab.construction§r' - '\n§9§9craftingScreen.tab.nature§r' - '\n§9§9craftingScreen.tab.items§r' - '\n§9§9craftingScreen.tab.commands§r')",
+//      "target_property_name": "#text"
+//    }
+//  ]
+//},
+  "highlight_slot_panel/white_border": {
+    "ignored": true
+  },
+  "inventory_selected_stack_size_text": {
+    "offset": "$selected_stack_offset",
+    "color": "$item_stack_count_color",
+    "layer": 55,
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$selected_stack_offset": [ 0.625, 1 ]
+      },
+      {
+        "requires": "$pocket_screen",
+        "$selected_stack_offset": [ 5, 6 ]
+      }
+    ],
+    "controls": [
+      {
+        "durability_bar_grabbed@common.durability_bar_grabbed": {
+          "ignored": false,
+          "offset": "$selected_durability_bar_offset",
+          "size": "$selected_durability_bar_size",
+          "$selected_durability_bar_offset|default": [ -9, 0 ],
+          "$selected_durability_bar_size|default": [ 12, 1 ],
+          "variables": [
+            {
+              "requires": "$pocket_screen",
+              "$selected_durability_bar_offset": [ -15, -3 ],
+              "$selected_durability_bar_size": [ 18, 1 ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+//Item Icons
+  "shield_renderer@crafting.item_renderer": {
+    "property_bag": {
+      "#item_id_aux": "$new_item_id_aux"
+    },
+    "layer": 0,
+    "size": "$shield_icon_size",
+    "$shield_icon_size|default": [ "100%", "100%" ],
+    "$trade_center_unchanged|default": false,
+    "variables": [
+      {
+        "requires": "($desktop_screen and $trade_center_unchanged)",
+        "$shield_icon_size": [ 16, 16 ]
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "(#item_id_aux = $old_item_id_aux)",
+        "binding_name_override": "#visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      }
+    ]
+  },
+  "obscure_overlay_renderer": {
+    "type": "image",
+    "texture": "$icon_texture",
+    "layer": 1,
+    "size": "$obscure_icon_size",
+    "$trade_center_unchanged|default": false,
+    "variables": [
+      {
+        "requires": "($desktop_screen and $trade_center_unchanged)",
+        "$obscure_icon_size": [ 16, 16 ]
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#item_id_aux",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(#item_id_aux = $item_id_aux)",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "icon_image_renderer": {
+    "type": "image",
+    "texture": "$icon_texture",
+    "layer": 1,
+    "size": "$icon_size",
+    "$trade_center_unchanged|default": false,
+    "variables": [
+      {
+        "requires": "($desktop_screen and $trade_center_unchanged)",
+        "$icon_size": [ 16, 16 ]
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#item_id_aux",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(#item_id_aux = $item_id_aux)",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "spectrum_image_renderer": {
+    "type": "image",
+    "texture": "$icon_texture",
+    "layer": 1,
+    "size": "$spectrum_icon_size",
+    "$spectrum_icon_size|default": [ "100%", "100%" ],
+    "$trade_center_unchanged|default": false,
+    "variables": [
+      {
+        "requires": "($desktop_screen and $trade_center_unchanged)",
+        "$spectrum_icon_size": [ 16, 16 ]
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#item_id_aux",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#item_id_aux < $lower_item_id_aux) and not (#item_id_aux > $upper_item_id_aux))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  // OBSCURE BLOCK OVERLAYS //
+  "beacon_overlay_image@common.obscure_overlay_renderer": {
+    "$icon_texture": "textures/overlay/beacon",
+    "$item_id_aux": 9043968,
+    "$obscure_icon_size": [ "100%", "100%" ]
+  },
+  // OBSCURE BLOCK ICONS //
+  "chest_image@common.spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/chest",
+    "$lower_item_id_aux": 3538944,
+    "$upper_item_id_aux": 3538949
+  },
+  "trapped_chest_image@common.spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/trapped_chest",
+    "$lower_item_id_aux": 9568256,
+    "$upper_item_id_aux": 9568261
+  },
+  "ender_chest_image@common.spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/ender_chest",
+    "$lower_item_id_aux": 8519680,
+    "$upper_item_id_aux": 8519685
+  },
+  "end_rod_image@common.spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/end_rod",
+    "$lower_item_id_aux": 13631488,
+    "$upper_item_id_aux": 13631493,
+    "$spectrum_icon_size": [ "110%", "110%" ]
+  },
+  "lightning_rod_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/lightning_rod",
+    "$item_id_aux": -20447232
+  },
+  "scaffolding_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/scaffolding",
+    "$item_id_aux": -10813440
+  },
+  "conduit_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/conduit",
+    "$item_id_aux": -10289152
+  },
+  // GLASS PANES //
+  "glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass",
+    "$item_id_aux": 6684672
+  },
+  "white_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_white",
+    "$item_id_aux": 10485760
+  },
+  "orange_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_orange",
+    "$item_id_aux": 10485761
+  },
+  "magenta_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_magenta",
+    "$item_id_aux": 10485762
+  },
+  "light_blue_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_light_blue",
+    "$item_id_aux": 10485763
+  },
+  "yellow_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_yellow",
+    "$item_id_aux": 10485764
+  },
+  "lime_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_lime",
+    "$item_id_aux": 10485765
+  },
+  "pink_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_pink",
+    "$item_id_aux": 10485766
+  },
+  "gray_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_gray",
+    "$item_id_aux": 10485767
+  },
+  "light_gray_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_silver",
+    "$item_id_aux": 10485768
+  },
+  "cyan_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_cyan",
+    "$item_id_aux": 10485769
+  },
+  "purple_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_purple",
+    "$item_id_aux": 10485770
+  },
+  "blue_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_blue",
+    "$item_id_aux": 10485771
+  },
+  "brown_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_brown",
+    "$item_id_aux": 10485772
+  },
+  "green_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_green",
+    "$item_id_aux": 10485773
+  },
+  "red_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_red",
+    "$item_id_aux": 10485774
+  },
+  "black_glass_pane_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_black",
+    "$item_id_aux": 10485775
+  },
+  // WALLS //
+  "andesite_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/andesite_wall",
+    "$item_id_aux": 9109508
+  },
+  "blackstone_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/blackstone_wall",
+    "$item_id_aux": -18153472
+  },
+  "border_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/border",
+    "$item_id_aux": 13893632
+  },
+  "brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/brick_wall",
+    "$item_id_aux": 9109510
+  },
+  "cobbled_deepslate_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/cobbled_deepslate_wall",
+    "$item_id_aux": -25034752
+  },
+  "cobblestone_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/cobblestone_wall",
+    "$item_id_aux": 9109504
+  },
+  "diorite_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/diorite_wall",
+    "$item_id_aux": 9109507
+  },
+  "deepslate_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/deepslate_brick_wall",
+    "$item_id_aux": -25821184
+  },
+  "deepslate_tile_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/deepslate_tile_wall",
+    "$item_id_aux": -25559040
+  },
+  "end_stone_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/end_stone_brick_wall",
+    "$item_id_aux": 9109514
+  },
+  "granite_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/granite_wall",
+    "$item_id_aux": 9109506
+  },
+  "mossy_cobblestone_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/mossy_cobblestone_wall",
+    "$item_id_aux": 9109505
+  },
+  "mossy_stone_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/mossy_stone_brick_wall",
+    "$item_id_aux": 9109512
+  },
+  "mud_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/mud_brick_wall",
+    "$item_id_aux": -31522816
+  },
+  "nether_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/nether_brick_wall",
+    "$item_id_aux": 9109513
+  },
+  "polished_blackstone_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/polished_blackstone_brick_wall",
+    "$item_id_aux": -18219008
+  },
+  "polished_blackstone_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/polished_blackstone_wall",
+    "$item_id_aux": -19464192
+  },
+  "polished_deepslate_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/polished_deepslate_wall",
+    "$item_id_aux": -25296896
+  },
+  "prismarine_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/prismarine_wall",
+    "$item_id_aux": 9109515
+  },
+  "red_nether_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/red_nether_brick_wall",
+    "$item_id_aux": 9109517
+  },
+  "red_sandstone_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/red_sandstone_wall",
+    "$item_id_aux": 9109516
+  },
+  "sandstone_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/sandstone_wall",
+    "$item_id_aux": 9109509
+  },
+  "stone_brick_wall_image@common.icon_image_renderer": {
+    "$icon_texture": "textures/icon/stone_brick_wall",
+    "$item_id_aux": 9109511
+  },
+  // HEADS //
+//"player_head_image@common.icon_image_renderer": { Head icons don't work, but the code is here in case they are fixed in the future.
+//  "$icon_texture": "textures/icon/player_head",
+//  "$item_id_aux": 26017795
+//},
+//"zombie_head_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/zombie_head",
+//  "$item_id_aux": 26017794
+//},
+//"creeper_head_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/creeper_head",
+//  "$item_id_aux": 26017796
+//},
+//"dragon_head_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/dragon_head",
+//  "$item_id_aux": 26017797
+//},
+//"skeleton_skull_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/skeleton_skull",
+//  "$item_id_aux": 26017792
+//},
+//"wither_skeleton_skull_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/wither_skeleton_skull",
+//  "$item_id_aux": 26017793
+//},
+  // BEDS //
+//"white_bed_image@common.icon_image_renderer": { Bed icons also don't work.
+//  "$icon_texture": "textures/icon/white_bed",
+//  "$item_id_aux": 27262976
+//},
+//"orange_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/orange_bed",
+//  "$item_id_aux": 27262977
+//},
+//"magenta_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/magenta_bed",
+//  "$item_id_aux": 27262978
+//},
+//"light_blue_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/light_blue_bed",
+//  "$item_id_aux": 27262979
+//},
+//"yellow_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/yellow_bed",
+//  "$item_id_aux": 27262980
+//},
+//"lime_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/lime_bed",
+//  "$item_id_aux": 27262981
+//},
+//"pink_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/pink_bed",
+//  "$item_id_aux": 27262982
+//},
+//"gray_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/gray_bed",
+//  "$item_id_aux": 27262983
+//},
+//"light_gray_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/light_gray_bed",
+//  "$item_id_aux": 27262984
+//},
+//"cyan_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/cyan_bed",
+//  "$item_id_aux": 27262985
+//},
+//"purple_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/purple_bed",
+//  "$item_id_aux": 27262986
+//},
+//"blue_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/blue_bed",
+//  "$item_id_aux": 27262987
+//},
+//"brown_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/brown_bed",
+//  "$item_id_aux": 27262988
+//},
+//"green_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/green_bed",
+//  "$item_id_aux": 27262989
+//},
+//"red_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/red_bed",
+//  "$item_id_aux": 27262990
+//},
+//"black_bed_image@common.icon_image_renderer": {
+//  "$icon_texture": "textures/icon/black_bed",
+//  "$item_id_aux": 27262991
+//},
+  // FENCE GATES //
+//"oak_fence_gate_image@common.spectrum_image_renderer": { Ditto for fence gates.
+//  "$icon_texture": "textures/icon/oak_fence_gate",
+//  "$lower_item_id_aux": 7012352,
+//  "$upper_item_id_aux": 7012367
+//},
+//"spruce_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/spruce_fence_gate",
+//  "$lower_item_id_aux": 11993088,
+//  "$upper_item_id_aux": 11993103
+//},
+//"birch_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/birch_fence_gate",
+//  "$lower_item_id_aux": 12058624,
+//  "$upper_item_id_aux": 12058639
+//},
+//"jungle_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/jungle_fence_gate",
+//  "$lower_item_id_aux": 12124160,
+//  "$upper_item_id_aux": 12124175
+//},
+//"acacia_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/acacia_fence_gate",
+//  "$lower_item_id_aux": 12255232,
+//  "$upper_item_id_aux": 12255247
+//},
+//"dark_oak_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/dark_oak_fence_gate",
+//  "$lower_item_id_aux": 12189696,
+//  "$upper_item_id_aux": 12189711
+//},
+//"crimson_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/crimson_fence_gate",
+//  "$lower_item_id_aux": -16908288,
+//  "$upper_item_id_aux": -16908273
+//},
+//"warped_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/warped_fence_gate",
+//  "$lower_item_id_aux": -16973824,
+//  "$upper_item_id_aux": -16973809
+//},
+//"mangrove_fence_gate_image@common.spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/mangrove_fence_gate",
+//  "$lower_item_id_aux": -32243712,
+//  "$upper_item_id_aux": -32243697
+//},
+  "item_list": {
+    "type": "panel",
+    "controls": [
+      {
+        "end_rod_image@common.end_rod_image": {}
+      },
+      {
+        "lightning_rod_image@common.lightning_rod_image": {}
+      },
+      {
+        "scaffolding_image@common.scaffolding_image": {}
+      },
+      {
+        "conduit_image@common.conduit_image": {}
+      },
+      {
+        "glass_pane_image@common.glass_pane_image": {}
+      },
+      {
+        "white_glass_pane_image@common.white_glass_pane_image": {}
+      },
+      {
+        "orange_glass_pane_image@common.orange_glass_pane_image": {}
+      },
+      {
+        "magenta_glass_pane_image@common.magenta_glass_pane_image": {}
+      },
+      {
+        "light_blue_glass_pane_image@common.light_blue_glass_pane_image": {}
+      },
+      {
+        "yellow_glass_pane_image@common.yellow_glass_pane_image": {}
+      },
+      {
+        "lime_glass_pane_image@common.lime_glass_pane_image": {}
+      },
+      {
+        "pink_glass_pane_image@common.pink_glass_pane_image": {}
+      },
+      {
+        "gray_glass_pane_image@common.gray_glass_pane_image": {}
+      },
+      {
+        "light_gray_glass_pane_image@common.light_gray_glass_pane_image": {}
+      },
+      {
+        "cyan_glass_pane_image@common.cyan_glass_pane_image": {}
+      },
+      {
+        "purple_glass_pane_image@common.purple_glass_pane_image": {}
+      },
+      {
+        "blue_glass_pane_image@common.blue_glass_pane_image": {}
+      },
+      {
+        "brown_glass_pane_image@common.brown_glass_pane_image": {}
+      },
+      {
+        "green_glass_pane_image@common.green_glass_pane_image": {}
+      },
+      {
+        "red_glass_pane_image@common.red_glass_pane_image": {}
+      },
+      {
+        "black_glass_pane_image@common.black_glass_pane_image": {}
+      },
+      {
+        "andesite_wall_image@common.andesite_wall_image": {}
+      },
+      {
+        "blackstone_wall_image@common.blackstone_wall_image": {}
+      },
+      {
+        "border_image@common.border_image": {}
+      },
+      {
+        "brick_wall_image@common.brick_wall_image": {}
+      },
+      {
+        "cobblestone_wall_image@common.cobblestone_wall_image": {}
+      },
+      {
+        "cobbled_deepslate_wall_image@common.cobbled_deepslate_wall_image": {}
+      },
+      {
+        "diorite_wall_image@common.diorite_wall_image": {}
+      },
+      {
+        "deepslate_brick_wall_image@common.deepslate_brick_wall_image": {}
+      },
+      {
+        "deepslate_tile_wall_image@common.deepslate_tile_wall_image": {}
+      },
+      {
+        "end_stone_brick_wall_image@common.end_stone_brick_wall_image": {}
+      },
+      {
+        "granite_wall_image@common.granite_wall_image": {}
+      },
+      {
+        "mossy_cobblestone_wall_image@common.mossy_cobblestone_wall_image": {}
+      },
+      {
+        "mossy_stone_brick_wall_image@common.mossy_stone_brick_wall_image": {}
+      },
+      {
+        "mud_brick_wall_image@common.mud_brick_wall_image": {}
+      },
+      {
+        "nether_brick_wall_image@common.nether_brick_wall_image": {}
+      },
+      {
+        "polished_blackstone_brick_wall_image@common.polished_blackstone_brick_wall_image": {}
+      },
+      {
+        "polished_blackstone_wall_image@common.polished_blackstone_wall_image": {}
+      },
+      {
+        "polished_deepslate_wall_image@common.polished_deepslate_wall_image": {}
+      },
+      {
+        "prismarine_wall_image@common.prismarine_wall_image": {}
+      },
+      {
+        "red_nether_brick_wall_image@common.red_nether_brick_wall_image": {}
+      },
+      {
+        "red_sandstone_wall_image@common.red_sandstone_wall_image": {}
+      },
+      {
+        "sandstone_wall_image@common.sandstone_wall_image": {}
+      },
+      {
+        "stone_brick_wall_image@common.stone_brick_wall_image": {}
+      },
+//    {
+//      "player_head_image@common.player_head_image": {}
+//    },
+//    {
+//      "zombie_head_image@common.zombie_head_image": {}
+//    },
+//    {
+//      "creeper_head_image@common.creeper_head_image": {}
+//    },
+//    {
+//      "dragon_head_image@common.dragon_head_image": {}
+//    },
+//    {
+//      "skeleton_skull_image@common.skeleton_skull_image": {}
+//    },
+//    {
+//      "wither_skeleton_skull_image@common.wither_skeleton_skull_image": {}
+//    },
+//    {
+//      "white_bed_image@common.white_bed_image": {}
+//    },
+//    {
+//      "orange_bed_image@common.orange_bed_image": {}
+//    },
+//    {
+//      "magenta_bed_image@common.magenta_bed_image": {}
+//    },
+//    {
+//      "light_blue_bed_image@common.light_blue_bed_image": {}
+//    },
+//    {
+//      "yellow_bed_image@common.yellow_bed_image": {}
+//    },
+//    {
+//      "lime_bed_image@common.lime_bed_image": {}
+//    },
+//    {
+//      "pink_bed_image@common.pink_bed_image": {}
+//    },
+//    {
+//      "gray_bed_image@common.gray_bed_image": {}
+//    },
+//    {
+//      "light_gray_bed_image@common.light_gray_bed_image": {}
+//    },
+//    {
+//      "cyan_bed_image@common.cyan_bed_image": {}
+//    },
+//    {
+//      "purple_bed_image@common.purple_bed_image": {}
+//    },
+//    {
+//      "blue_bed_image@common.blue_bed_image": {}
+//    },
+//    {
+//      "brown_bed_image@common.brown_bed_image": {}
+//    },
+//    {
+//      "green_bed_image@common.green_bed_image": {}
+//    },
+//    {
+//      "red_bed_image@common.red_bed_image": {}
+//    },
+//    {
+//      "black_bed_image@common.black_bed_image": {}
+//    },
+//    {
+//      "oak_fence_gate_image@common.oak_fence_gate_image": {}
+//    },
+//    {
+//      "spruce_fence_gate_image@common.spruce_fence_gate_image": {}
+//    },
+//    {
+//      "birch_fence_gate_image@common.birch_fence_gate_image": {}
+//    },
+//    {
+//      "jungle_fence_gate_image@common.jungle_fence_gate_image": {}
+//    },
+//    {
+//      "acacia_fence_gate_image@common.acacia_fence_gate_image": {}
+//    },
+//    {
+//      "dark_oak_fence_gate_image@common.dark_oak_fence_gate_image": {}
+//    },
+//    {
+//      "crimson_fence_gate_image@common.crimson_fence_gate_image": {}
+//    },
+//    {
+//      "warped_fence_gate_image@common.warped_fence_gate_image": {}
+//    },
+//    {
+//      "mangrove_fence_gate_image@common.mangrove_fence_gate_image": {}
+//    },
+      {
+        "beacon_overlay_image@common.beacon_overlay_image": {}
+      },
+      {
+        "shield_renderer@common.shield_renderer": {
+          "$old_item_id_aux": 23265280,
+          "$new_item_id_aux": 16384000
+        }
+      },
+      {
+        "enchanted_shield_renderer@common.shield_renderer": {
+          "$old_item_id_aux": 23298048,
+          "$new_item_id_aux": 16416768
+        }
+      }
+    ]
+  },
+  "item_renderer@common.empty_element": {
+    "type": "panel",
+    "layer": 5,
+    "$icon_size": [ "100%", "100%" ],
+    "$use_item_icons|default": true,
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$selected_size": [ 17, 16.50 ]
+      },
+      {
+        "requires": "$pocket_screen",
+        "$selected_size": [ 25.5, 24.8 ]
+      },
+      {
+        "requires": "$is_multipixel_bedrock",
+        "$use_item_icons": false
+      }
+    ],
+    "controls": [
+      {
+        "specific_item_renderer@common.specific_item_renderer": {}
+      },
+      {
+        "chest_image@common.chest_image": {} //Disabling vanilla chest icons uses a different system than other item icons. Because of that, chests are the only item icons that cannot be disabled.
+      },
+      {
+        "trapped_chest_image@common.trapped_chest_image": {}
+      },
+      {
+        "ender_chest_image@common.ender_chest_image": {}
+      },
+      {
+        "item_list@common.item_list": {
+          "ignored": "(not $use_item_icons)"
+        }
+      }
+    ],
+    "bindings": []
+  },
+  "specific_item_renderer": {
+    "type": "custom",
+    "renderer": "inventory_item_renderer",
+    "layer": 0,
+    "size": "$item_renderer_size",
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$item_renderer_size": [ 15.98, 15.98 ]
+      },
+      {
+        "requires": "$pocket_screen",
+        "$item_renderer_size": [ "100%", "100%" ]
+      }
+    ],
+    "$item_renderer_binding_condition|default": "none",
+    "bindings": [
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#item_id_aux",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "view",           //Wall Lower                       Wall Upper                  Stained Glass Pane Lower      Stained Glass Pane Upper     End Rod Lower                 End Rod Upper                Glass Pane                  Blackstone Wall              Polished Blackstone Brick Wall Polished Blackstone Wall      Shield                       Enchanted Shield             Scaffolding                   Conduit                       Lightning Rod                 Cobbled Deepslate Wall        Polished Deepslate Wall       Deepslate Brick Wall          Deepslate Tile Wall           Mud Brick Wall                Border
+        "source_property_name": "(not (not (#item_id_aux < 9109504) and not (#item_id_aux > 9109517) or (#item_id_aux > 10485759) and (#item_id_aux < 10485776) or (#item_id_aux > 13631487) and (#item_id_aux < 13631491) or (#item_id_aux = 6684672) or (#item_id_aux = -18153472) or (#item_id_aux = -18219008) or (#item_id_aux = -19464192) or (#item_id_aux = 23265280) or (#item_id_aux = 23298048) or (#item_id_aux = -10813440) or (#item_id_aux = -10289152) or (#item_id_aux = -20447232) or (#item_id_aux = -25034752) or (#item_id_aux = -25296896) or (#item_id_aux = -25821184) or (#item_id_aux = -25559040) or (#item_id_aux = -31522816) or (#item_id_aux = 13893632)))",
+        "target_property_name": "#visible",
+        "ignored": "(not $use_item_icons)"
+      },
+      {
+        "binding_name": "#charged_item",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#item_custom_color",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#item_pickup_time",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#banner_patterns",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#banner_colors",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#banner_type",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "collection",
+        "binding_name": "#show_item",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#inactive_item",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_name_override": "#disabled_filter_visible",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#item_lodestone_tracking_handle",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      }
+    ]
+  },
+  "specific_item_renderer_performance": {
+    "type": "custom",
+    "renderer": "inventory_item_renderer",
+    "layer": 0,
+    "size": "$item_renderer_size",
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$item_renderer_size": [ 15.98, 15.98 ]
+      },
+      {
+        "requires": "$pocket_screen",
+        "$item_renderer_size": [ "100%", "100%" ]
+      }
+    ],
+    "$item_renderer_binding_condition|default": "none",
+    "bindings": [
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#item_id_aux",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#charged_item",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#item_custom_color",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#banner_patterns",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#banner_colors",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#banner_type",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "collection",
+        "binding_name": "#show_item",
+        "binding_name_override": "#visible",
+        "binding_collection_name": "$item_collection_name",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#inactive_item",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name",
+        "binding_name_override": "#disabled_filter_visible",
+        "binding_condition": "$item_renderer_binding_condition"
+      },
+      {
+        "binding_name": "#item_lodestone_tracking_handle",
+        "binding_condition": "visible",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      }
+    ]
+  },
+  ////////////////////
+  // SELECTED ICONS //
+  ////////////////////
+  // IMAGE RENDERERS //
+  "selected_shield_renderer@crafting.item_renderer": {
+    "property_bag": {
+      "#item_id_aux": "$new_item_id_aux"
+    },
+    "layer": 1,
+    "size": "$selected_shield_size",
+    "$selected_shield_size|default": [ 16, 16 ],
+    "variables": [
+      {
+        "requires": "$pocket_screen",
+        "$selected_shield_size": [ 24, 24 ]
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "(#inventory_selected_item = $old_item_id_aux)",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ]
+  },
+  "selected_obscure_overlay_renderer": {
+    "type": "image",
+    "texture": "$icon_texture",
+    "layer": 1,
+    "size": "$obscure_icon_size",
+    "bindings": [
+      {
+        "binding_name": "(#inventory_selected_item = $item_id_aux)",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ]
+  },
+  "selected_icon_image_renderer": {
+    "type": "image",
+    "texture": "$icon_texture",
+    "layer": 1,
+    "size": "$selected_icon_size",
+    "$selected_icon_size|default": [ 16, 16 ],
+    "bindings": [
+      {
+        "binding_name": "(#inventory_selected_item = $item_id_aux)",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ],
+    "variables": [
+      {
+        "requires": "$pocket_screen",
+        "$selected_icon_size": [ 24, 24 ]
+      }
+    ]
+  },
+  "selected_spectrum_image_renderer": {
+    "type": "image",
+    "texture": "$icon_texture",
+    "layer": 1,
+    "size": [ "94%", "96.85%" ],
+    "bindings": [
+      {
+        "binding_name": "(not (#inventory_selected_item < $lower_item_id_aux) and not (#inventory_selected_item > $upper_item_id_aux))",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ]
+  },
+  // OBSCURE BLOCK OVERLAYS //
+  "selected_beacon_overlay_image@common.selected_obscure_overlay_renderer": {
+    "$icon_texture": "textures/overlay/beacon",
+    "$item_id_aux": 9043968,
+    "$obscure_icon_size": [ "100%", "100%" ]
+  },
+  // OBSCURE BLOCK ICONS //
+  "selected_chest_image@common.selected_spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/chest",
+    "$lower_item_id_aux": 3538944,
+    "$upper_item_id_aux": 3538949
+  },
+  "selected_trapped_chest_image@common.selected_spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/trapped_chest",
+    "$lower_item_id_aux": 9568256,
+    "$upper_item_id_aux": 9568261
+  },
+  "selected_ender_chest_image@common.selected_spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/ender_chest",
+    "$lower_item_id_aux": 8519680,
+    "$upper_item_id_aux": 8519685
+  },
+  "selected_end_rod_image@common.selected_spectrum_image_renderer": {
+    "$icon_texture": "textures/icon/end_rod",
+    "$lower_item_id_aux": 13631488,
+    "$upper_item_id_aux": 13631493,
+    "size": [ "110%", "110%" ]
+  },
+  "selected_lightning_rod_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/lightning_rod",
+    "$item_id_aux": -20447232
+  },
+  "selected_scaffolding_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/scaffolding",
+    "$item_id_aux": -10813440
+  },
+  "selected_conduit_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/conduit",
+    "$item_id_aux": -10289152
+  },
+  // GLASS PANES //
+  "selected_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass",
+    "$item_id_aux": 6684672
+  },
+  "selected_white_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_white",
+    "$item_id_aux": 10485760
+  },
+  "selected_orange_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_orange",
+    "$item_id_aux": 10485761
+  },
+  "selected_magenta_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_magenta",
+    "$item_id_aux": 10485762
+  },
+  "selected_light_blue_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_light_blue",
+    "$item_id_aux": 10485763
+  },
+  "selected_yellow_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_yellow",
+    "$item_id_aux": 10485764
+  },
+  "selected_lime_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_lime",
+    "$item_id_aux": 10485765
+  },
+  "selected_pink_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_pink",
+    "$item_id_aux": 10485766
+  },
+  "selected_gray_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_gray",
+    "$item_id_aux": 10485767
+  },
+  "selected_light_gray_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_silver",
+    "$item_id_aux": 10485768
+  },
+  "selected_cyan_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_cyan",
+    "$item_id_aux": 10485769
+  },
+  "selected_purple_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_purple",
+    "$item_id_aux": 10485770
+  },
+  "selected_blue_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_blue",
+    "$item_id_aux": 10485771
+  },
+  "selected_brown_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_brown",
+    "$item_id_aux": 10485772
+  },
+  "selected_green_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_green",
+    "$item_id_aux": 10485773
+  },
+  "selected_red_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_red",
+    "$item_id_aux": 10485774
+  },
+  "selected_black_glass_pane_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/blocks/glass_black",
+    "$item_id_aux": 10485775
+  },
+  // WALLS //
+  "selected_andesite_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/andesite_wall",
+    "$item_id_aux": 9109508
+  },
+  "selected_blackstone_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/blackstone_wall",
+    "$item_id_aux": -18153472
+  },
+  "selected_border_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/border",
+    "$item_id_aux": 13893632
+  },
+  "selected_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/brick_wall",
+    "$item_id_aux": 9109510
+  },
+  "selected_cobbled_deepslate_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/cobbled_deepslate_wall",
+    "$item_id_aux": -25034752
+  },
+  "selected_cobblestone_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/cobblestone_wall",
+    "$item_id_aux": 9109504
+  },
+  "selected_diorite_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/diorite_wall",
+    "$item_id_aux": 9109507
+  },
+  "selected_deepslate_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/deepslate_brick_wall",
+    "$item_id_aux": -25821184
+  },
+  "selected_deepslate_tile_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/deepslate_tile_wall",
+    "$item_id_aux": -25559040
+  },
+  "selected_end_stone_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/end_stone_brick_wall",
+    "$item_id_aux": 9109514
+  },
+  "selected_granite_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/granite_wall",
+    "$item_id_aux": 9109506
+  },
+  "selected_mossy_cobblestone_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/mossy_cobblestone_wall",
+    "$item_id_aux": 9109505
+  },
+  "selected_mossy_stone_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/mossy_stone_brick_wall",
+    "$item_id_aux": 9109512
+  },
+  "selected_mud_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/mud_brick_wall",
+    "$item_id_aux": -31522816
+  },
+  "selected_nether_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/nether_brick_wall",
+    "$item_id_aux": 9109513
+  },
+  "selected_polished_blackstone_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/polished_blackstone_brick_wall",
+    "$item_id_aux": -18219008
+  },
+  "selected_polished_blackstone_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/polished_blackstone_wall",
+    "$item_id_aux": -19464192
+  },
+  "selected_polished_deepslate_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/polished_deepslate_wall",
+    "$item_id_aux": -25296896
+  },
+  "selected_prismarine_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/prismarine_wall",
+    "$item_id_aux": 9109515
+  },
+  "selected_red_nether_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/red_nether_brick_wall",
+    "$item_id_aux": 9109517
+  },
+  "selected_red_sandstone_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/red_sandstone_wall",
+    "$item_id_aux": 9109516
+  },
+  "selected_sandstone_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/sandstone_wall",
+    "$item_id_aux": 9109509
+  },
+  "selected_stone_brick_wall_image@common.selected_icon_image_renderer": {
+    "$icon_texture": "textures/icon/stone_brick_wall",
+    "$item_id_aux": 9109511
+  },
+  // HEADS //
+//"selected_player_head_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/player_head",
+//  "$item_id_aux": 26017795
+//},
+//"selected_zombie_head_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/zombie_head",
+//  "$item_id_aux": 26017794
+//},
+//"selected_creeper_head_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/creeper_head",
+//  "$item_id_aux": 26017796
+//},
+//"selected_dragon_head_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/dragon_head",
+//  "$item_id_aux": 26017797
+//},
+//"selected_skeleton_skull_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/skeleton_skull",
+//  "$item_id_aux": 26017792
+//},
+//"selected_wither_skeleton_skull_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/wither_skeleton_skull",
+//  "$item_id_aux": 26017793
+//},
+  // BEDS //
+//"selected_white_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/white_bed",
+//  "$item_id_aux": 23265280
+//},
+//"selected_orange_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/orange_bed",
+//  "$item_id_aux": 23265281
+//},
+//"selected_magenta_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/magenta_bed",
+//  "$item_id_aux": 23265282
+//},
+//"selected_light_blue_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/light_blue_bed",
+//  "$item_id_aux": 23265283
+//},
+//"selected_yellow_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/yellow_bed",
+//  "$item_id_aux": 23265284
+//},
+//"selected_lime_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/lime_bed",
+//  "$item_id_aux": 23265285
+//},
+//"selected_pink_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/pink_bed",
+//  "$item_id_aux": 23265286
+//},
+//"selected_gray_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/gray_bed",
+//  "$item_id_aux": 23265287
+//},
+//"selected_light_gray_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/light_gray_bed",
+//  "$item_id_aux": 23265288
+//},
+//"selected_cyan_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/cyan_bed",
+//  "$item_id_aux": 23265289
+//},
+//"selected_purple_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/purple_bed",
+//  "$item_id_aux": 23265290
+//},
+//"selected_blue_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/blue_bed",
+//  "$item_id_aux": 23265291
+//},
+//"selected_brown_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/brown_bed",
+//  "$item_id_aux": 23265292
+//},
+//"selected_green_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/green_bed",
+//  "$item_id_aux": 23265293
+//},
+//"selected_red_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/red_bed",
+//  "$item_id_aux": 23265294
+//},
+//"selected_black_bed_image@common.selected_icon_image_renderer": {
+//  "$icon_texture": "textures/icon/black_bed",
+//  "$item_id_aux": 23265295
+//},
+  // FENCE GATES //
+//"selected_oak_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/oak_fence_gate",
+//  "$lower_item_id_aux": 7012352,
+//  "$upper_item_id_aux": 7012367
+//},
+//"selected_spruce_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/spruce_fence_gate",
+//  "$lower_item_id_aux": 11993088,
+//  "$upper_item_id_aux": 11993103
+//},
+//"selected_birch_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/birch_fence_gate",
+//  "$lower_item_id_aux": 12058624,
+//  "$upper_item_id_aux": 12058639
+//},
+//"selected_jungle_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/jungle_fence_gate",
+//  "$lower_item_id_aux": 12124160,
+//  "$upper_item_id_aux": 12124175
+//},
+//"selected_acacia_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/acacia_fence_gate",
+//  "$lower_item_id_aux": 12255232,
+//  "$upper_item_id_aux": 12255247
+//},
+//"selected_dark_oak_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/dark_oak_fence_gate",
+//  "$lower_item_id_aux": 12189696,
+//  "$upper_item_id_aux": 12189711
+//},
+//"selected_crimson_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/crimson_fence_gate",
+//  "$lower_item_id_aux": -16908288,
+//  "$upper_item_id_aux": -16908273
+//},
+//"selected_warped_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/warped_fence_gate",
+//  "$lower_item_id_aux": -16973824,
+//  "$upper_item_id_aux": -16973809
+//},
+//"selected_mangrove_fence_gate_image@common.selected_spectrum_image_renderer": {
+//  "$icon_texture": "textures/icon/mangrove_fence_gate",
+//  "$lower_item_id_aux": -32243712,
+//  "$upper_item_id_aux": -32243697
+//},
+  "inventory_selected_icon": {
+    "layer": 53,
+    "size": "$selected_size",
+    "min_size": [ 17, 16.5 ],
+    "offset": [ 0, -0.50 ],
+    "$use_item_icons|default": true,
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$selected_size": [ 17, 16.50 ]
+      },
+      {
+        "requires": "$pocket_screen",
+        "$selected_size": [ 25.5, 24.8 ]
+      },
+      {
+        "requires": "$is_multipixel_bedrock",
+        "$use_item_icons": false
+      }
+    ],
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "clips_children": true,
+    "controls": [
+      {
+        "selected_chest_image@common.selected_chest_image": {}
+      },
+      {
+        "selected_trapped_chest_image@common.selected_trapped_chest_image": {}
+      },
+      {
+        "selected_ender_chest_image@common.selected_ender_chest_image": {}
+      },
+      {
+        "selected_end_rod_image@common.selected_end_rod_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_lightning_rod_image@common.selected_lightning_rod_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_scaffolding_image@common.selected_scaffolding_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_conduit_image@common.selected_conduit_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_glass_pane_image@common.selected_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_white_glass_pane_image@common.selected_white_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_orange_glass_pane_image@common.selected_orange_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_magenta_glass_pane_image@common.selected_magenta_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_light_blue_glass_pane_image@common.selected_light_blue_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_yellow_glass_pane_image@common.selected_yellow_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_lime_glass_pane_image@common.selected_lime_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_pink_glass_pane_image@common.selected_pink_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_gray_glass_pane_image@common.selected_gray_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_light_gray_glass_pane_image@common.selected_light_gray_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_cyan_glass_pane_image@common.selected_cyan_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_purple_glass_pane_image@common.selected_purple_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_blue_glass_pane_image@common.selected_blue_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_brown_glass_pane_image@common.selected_brown_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_green_glass_pane_image@common.selected_green_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_red_glass_pane_image@common.selected_red_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_black_glass_pane_image@common.selected_black_glass_pane_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_andesite_wall_image@common.selected_andesite_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_blackstone_wall_image@common.selected_blackstone_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_border_image@common.selected_border_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_brick_wall_image@common.selected_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_cobbled_deepslate_wall_image@common.selected_cobbled_deepslate_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_cobblestone_wall_image@common.selected_cobblestone_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_diorite_wall_image@common.selected_diorite_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_deepslate_brick_wall_image@common.selected_deepslate_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_deepslate_tile_wall_image@common.selected_deepslate_tile_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_end_stone_brick_wall_image@common.selected_end_stone_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_granite_wall_image@common.selected_granite_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_mossy_cobblestone_wall_image@common.selected_mossy_cobblestone_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_mossy_stone_brick_wall_image@common.selected_mossy_stone_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_mud_brick_wall_image@common.selected_mud_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_nether_brick_wall_image@common.selected_nether_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_polished_blackstone_brick_wall_image@common.selected_polished_blackstone_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_polished_blackstone_wall_image@common.selected_polished_blackstone_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_polished_deepslate_wall_image@common.selected_polished_deepslate_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_prismarine_wall_image@common.selected_prismarine_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_red_nether_brick_wall_image@common.selected_red_nether_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_red_sandstone_wall_image@common.selected_red_sandstone_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_sandstone_wall_image@common.selected_sandstone_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_stone_brick_wall_image@common.selected_stone_brick_wall_image": {
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+//    {
+//      "selected_player_head_image@common.selected_player_head_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_zombie_head_image@common.selected_zombie_head_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_creeper_head_image@common.selected_creeper_head_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_dragon_head_image@common.selected_dragon_head_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_skeleton_skull_image@common.selected_skeleton_skull_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_wither_skeleton_skull_image@common.selected_wither_skeleton_skull_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_white_bed_image@common.selected_white_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_orange_bed_image@common.selected_orange_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_magenta_bed_image@common.selected_magenta_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_light_blue_bed_image@common.selected_light_blue_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_yellow_bed_image@common.selected_yellow_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_lime_bed_image@common.selected_lime_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_pink_bed_image@common.selected_pink_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_gray_bed_image@common.selected_gray_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_light_gray_bed_image@common.selected_light_gray_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_cyan_bed_image@common.selected_cyan_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_purple_bed_image@common.selected_purple_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_blue_bed_image@common.selected_blue_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_brown_bed_image@common.selected_brown_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_green_bed_image@common.selected_green_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_red_bed_image@common.selected_red_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_black_bed_image@common.selected_black_bed_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_oak_fence_gate_image@common.selected_oak_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_spruce_fence_gate_image@common.selected_spruce_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_birch_fence_gate_image@common.selected_birch_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_jungle_fence_gate_image@common.selected_jungle_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_acacia_fence_gate_image@common.selected_acacia_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_dark_oak_fence_gate_image@common.selected_dark_oak_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_crimson_fence_gate_image@common.selected_crimson_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_warped_fence_gate_image@common.selected_warped_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+//    {
+//      "selected_mangrove_fence_gate_image@common.selected_mangrove_fence_gate_image": {
+//        "ignored": "(not $use_item_icons)"
+//      }
+//    },
+      {
+        "selected_shield_renderer@common.selected_shield_renderer": {
+          "$old_item_id_aux": 23265280,
+          "$new_item_id_aux": 16384000,
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "selected_enchanted_shield_renderer@common.selected_shield_renderer": {
+          "$old_item_id_aux": 23298048,
+          "$new_item_id_aux": 16416768,
+          "ignored": "(not $use_item_icons)"
+        }
+      },
+      {
+        "specific_item_renderer@common.specific_inventory_selected_icon": {
+          "size": [ "94%", "96.85%" ],
+          "controls": [
+            {
+              "selected_beacon_overlay_image@common.selected_beacon_overlay_image": {
+                "ignored": "(not $use_item_icons)"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "specific_inventory_selected_icon@common.specific_item_renderer": {
+    "layer": 0,
+    "bindings": [
+      {
+        "binding_name": "#inventory_selected_item",
+        "binding_name_override": "#item_id_aux",
+        "binding_condition": "always_when_visible"
+      },
+      {
+        "binding_name": "#inventory_selected_item_charged_item",
+        "binding_name_override": "#charged_item",
+        "binding_condition": "always_when_visible"
+      },
+      {
+        "binding_name": "#inventory_selected_item_color",
+        "binding_name_override": "#item_custom_color",
+        "binding_condition": "always_when_visible"
+      },
+      {
+        "binding_name": "#inventory_selected_banner_patterns",
+        "binding_name_override": "#banner_patterns",
+        "binding_condition": "always_when_visible"
+      },
+      {
+        "binding_name": "#inventory_selected_banner_colors",
+        "binding_name_override": "#banner_colors",
+        "binding_condition": "always_when_visible"
+      },
+      {
+        "binding_name": "#inventory_selected_banner_type",
+        "binding_name_override": "#banner_type",
+        "binding_condition": "always_when_visible"
+      }
+    ]
+  },
+//Durability Bar
+  "durability_bar_base": {
+    "type": "image",
+    "size": "$durability_bar_size",
+    "offset": "$durability_bar_offset",
+    "uv": "$durability_bar_uv",
+    "uv_size": "$durability_bar_uv_size",
+    "texture": "$durability_bar_texture",
+    "$durability_bar_size|default": [ 26, 2 ],
+    "$durability_bar_offset|default": [ 0.5, 1 ],
+    "$durability_bar_uv|default": [ 0, 26 ],
+    "$durability_bar_uv_size|default": [ 13, 2 ],
+    "$durability_bar_texture|default": "textures/ui/durability_bar"
+  },
+  "durability_bar_template@common.durability_bar_base": {
+    "bindings": [
+      {
+        "binding_name": "#item_durability_total_amount",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_name": "#item_durability_current_amount",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(((#item_durability_current_amount / #item_durability_total_amount) > $lower_number) and ((#item_durability_current_amount / #item_durability_total_amount) < $upper_number) or ((#item_durability_current_amount / #item_durability_total_amount) = $lower_number))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "variables": [
+      {
+        "requires": "$pocket_screen",
+        "$durability_bar_offset": [ 0.8, -0.3 ],
+        "$durability_bar_uv_size": [ 39, 4 ],
+        "$durability_bar_texture": "textures/ui/durability_bar_pocket"
+      }
+    ]
+  },
+  "durability_bar@common.empty_element": {
+    "type": "panel",
+    "layer": 10,
+    "ignored": "(not $durability_bar_required)",
+    "controls": [
+      { "durability_bar_13@common.durability_bar_template": { "$durability_bar_uv": [ 0, 26 ], "$lower_number": 0.9285714284, "$upper_number": 1.0,          "ignored": "$pocket_screen" } },
+      { "durability_bar_12@common.durability_bar_template": { "$durability_bar_uv": [ 0, 24 ], "$lower_number": 0.8571428570, "$upper_number": 0.9285714284, "ignored": "$pocket_screen" } },
+      { "durability_bar_11@common.durability_bar_template": { "$durability_bar_uv": [ 0, 22 ], "$lower_number": 0.7857142856, "$upper_number": 0.8571428570, "ignored": "$pocket_screen" } },
+      { "durability_bar_10@common.durability_bar_template": { "$durability_bar_uv": [ 0, 20 ], "$lower_number": 0.7142857141, "$upper_number": 0.7857142856, "ignored": "$pocket_screen" } },
+      { "durability_bar_9@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 18 ], "$lower_number": 0.6428571427, "$upper_number": 0.7142857141, "ignored": "$pocket_screen" } },
+      { "durability_bar_8@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 16 ], "$lower_number": 0.5714285713, "$upper_number": 0.6428571427, "ignored": "$pocket_screen" } },
+      { "durability_bar_7@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 14 ], "$lower_number": 0.4999999999, "$upper_number": 0.5714285713, "ignored": "$pocket_screen" } },
+      { "durability_bar_6@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 12 ], "$lower_number": 0.4285714284, "$upper_number": 0.4999999999, "ignored": "$pocket_screen" } },
+      { "durability_bar_5@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 10 ], "$lower_number": 0.3571428570, "$upper_number": 0.4285714284, "ignored": "$pocket_screen" } },
+      { "durability_bar_4@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 8 ],  "$lower_number": 0.2857142856, "$upper_number": 0.3571428570, "ignored": "$pocket_screen" } },
+      { "durability_bar_3@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 6 ],  "$lower_number": 0.2142857141, "$upper_number": 0.2857142856, "ignored": "$pocket_screen" } },
+      { "durability_bar_2@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 4 ],  "$lower_number": 0.1428571427, "$upper_number": 0.2142857141, "ignored": "$pocket_screen" } },
+      { "durability_bar_1@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 2 ],  "$lower_number": 0.0714285713, "$upper_number": 0.1428571427, "ignored": "$pocket_screen" } },
+      { "durability_bar_0@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 0 ],  "$lower_number": -1.0,         "$upper_number": 0.0714285713, "ignored": "$pocket_screen" } },
+      { "pocket_durability_bar_13@common.durability_bar_template": { "$durability_bar_uv": [ 0, 52 ], "$lower_number": 0.9285714284, "$upper_number": 1.0,          "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_12@common.durability_bar_template": { "$durability_bar_uv": [ 0, 48 ], "$lower_number": 0.8571428570, "$upper_number": 0.9285714284, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_11@common.durability_bar_template": { "$durability_bar_uv": [ 0, 44 ], "$lower_number": 0.7857142856, "$upper_number": 0.8571428570, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_10@common.durability_bar_template": { "$durability_bar_uv": [ 0, 40 ], "$lower_number": 0.7142857141, "$upper_number": 0.7857142856, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_9@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 36 ], "$lower_number": 0.6428571427, "$upper_number": 0.7142857141, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_8@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 32 ], "$lower_number": 0.5714285713, "$upper_number": 0.6428571427, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_7@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 28 ], "$lower_number": 0.4999999999, "$upper_number": 0.5714285713, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_6@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 24 ], "$lower_number": 0.4285714284, "$upper_number": 0.4999999999, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_5@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 20 ], "$lower_number": 0.3571428570, "$upper_number": 0.4285714284, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_4@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 16 ], "$lower_number": 0.2857142856, "$upper_number": 0.3571428570, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_3@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 12 ], "$lower_number": 0.2142857141, "$upper_number": 0.2857142856, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_2@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 8 ],  "$lower_number": 0.1428571427, "$upper_number": 0.2142857141, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_1@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 4 ],  "$lower_number": 0.0714285713, "$upper_number": 0.1428571427, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_0@common.durability_bar_template":  { "$durability_bar_uv": [ 0, 0 ],  "$lower_number": -1.0,         "$upper_number": 0.0714285713, "ignored": "$desktop_screen" } }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#item_durability_total_amount",
+        "binding_type": "collection",
+        "binding_collection_name": "$item_collection_name"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#item_durability_total_amount = 0))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "offset": "$durability_bar_offset",
+    "variables": [
+      {
+        "requires": "$desktop_screen",
+        "$durability_bar_offset": [ 0.25, 3 ]
+      },
+      {
+        "requires": "$pocket_screen",
+        "$durability_bar_offset": [ 0.125, 9 ],
+        "$durability_bar_size": [ 19.5, 2 ]
+      }
+    ]
+  },
+  "selected_durability_bar_template@common.durability_bar_base": {
+    "$durability_bar_offset|default": [ 0.5, 1.25 ],
+    "bindings": [
+      {
+        "binding_name": "#selected_item_durability_total_amount"
+      },
+      {
+        "binding_name": "#selected_item_durability_current_amount"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(((#selected_item_durability_current_amount / #selected_item_durability_total_amount) > $lower_number) and ((#selected_item_durability_current_amount / #selected_item_durability_total_amount) < $upper_number)  or ((#selected_item_durability_current_amount / #selected_item_durability_total_amount) = $lower_number))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "variables": [
+      {
+        "requires": "$pocket_screen",
+        "$durability_bar_offset": [ 2, 1.5 ],
+        "$durability_bar_uv_size": [ 39, 4 ],
+        "$durability_bar_texture": "textures/ui/durability_bar_pocket"
+      }
+    ]
+  },
+  "durability_bar_grabbed@durability_bar": { //For some reason, adding "common." before "durability_bar" here breaks the code.
+    "ignored": true,
+    "controls": [
+      { "durability_bar_13@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 26 ], "$lower_number": 0.9285714284, "$upper_number": 1.0,          "ignored": "$pocket_screen" } },
+      { "durability_bar_12@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 24 ], "$lower_number": 0.8571428570, "$upper_number": 0.9285714284, "ignored": "$pocket_screen" } },
+      { "durability_bar_11@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 22 ], "$lower_number": 0.7857142856, "$upper_number": 0.8571428570, "ignored": "$pocket_screen" } },
+      { "durability_bar_10@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 20 ], "$lower_number": 0.7142857141, "$upper_number": 0.7857142856, "ignored": "$pocket_screen" } },
+      { "durability_bar_9@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 18 ], "$lower_number": 0.6428571427, "$upper_number": 0.7142857141, "ignored": "$pocket_screen" } },
+      { "durability_bar_8@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 16 ], "$lower_number": 0.5714285713, "$upper_number": 0.6428571427, "ignored": "$pocket_screen" } },
+      { "durability_bar_7@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 14 ], "$lower_number": 0.4999999999, "$upper_number": 0.5714285713, "ignored": "$pocket_screen" } },
+      { "durability_bar_6@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 12 ], "$lower_number": 0.4285714284, "$upper_number": 0.4999999999, "ignored": "$pocket_screen" } },
+      { "durability_bar_5@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 10 ], "$lower_number": 0.3571428570, "$upper_number": 0.4285714284, "ignored": "$pocket_screen" } },
+      { "durability_bar_4@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 8 ],  "$lower_number": 0.2857142856, "$upper_number": 0.3571428570, "ignored": "$pocket_screen" } },
+      { "durability_bar_3@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 6 ],  "$lower_number": 0.2142857141, "$upper_number": 0.2857142856, "ignored": "$pocket_screen" } },
+      { "durability_bar_2@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 4 ],  "$lower_number": 0.1428571427, "$upper_number": 0.2142857141, "ignored": "$pocket_screen" } },
+      { "durability_bar_1@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 2 ],  "$lower_number": 0.0714285713, "$upper_number": 0.1428571427, "ignored": "$pocket_screen" } },
+      { "durability_bar_0@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 0 ],  "$lower_number": -1.0,         "$upper_number": 0.0714285713, "ignored": "$pocket_screen" } },
+      { "pocket_durability_bar_13@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 52 ], "$lower_number": 0.9285714284, "$upper_number": 1.0,          "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_12@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 48 ], "$lower_number": 0.8571428570, "$upper_number": 0.9285714284, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_11@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 44 ], "$lower_number": 0.7857142856, "$upper_number": 0.8571428570, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_10@common.selected_durability_bar_template": { "$durability_bar_uv": [ 0, 40 ], "$lower_number": 0.7142857141, "$upper_number": 0.7857142856, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_9@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 36 ], "$lower_number": 0.6428571427, "$upper_number": 0.7142857141, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_8@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 32 ], "$lower_number": 0.5714285713, "$upper_number": 0.6428571427, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_7@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 28 ], "$lower_number": 0.4999999999, "$upper_number": 0.5714285713, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_6@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 24 ], "$lower_number": 0.4285714284, "$upper_number": 0.4999999999, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_5@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 20 ], "$lower_number": 0.3571428570, "$upper_number": 0.4285714284, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_4@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 16 ], "$lower_number": 0.2857142856, "$upper_number": 0.3571428570, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_3@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 12 ], "$lower_number": 0.2142857141, "$upper_number": 0.2857142856, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_2@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 8 ],  "$lower_number": 0.1428571427, "$upper_number": 0.2142857141, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_1@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 4 ],  "$lower_number": 0.0714285713, "$upper_number": 0.1428571427, "ignored": "$desktop_screen" } },
+      { "pocket_durability_bar_0@common.selected_durability_bar_template":  { "$durability_bar_uv": [ 0, 0 ],  "$lower_number": -1.0,         "$upper_number": 0.0714285713, "ignored": "$desktop_screen" } }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#selected_item_durability_total_amount"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#selected_item_durability_total_amount = 0))",
+        "target_property_name": "#visible"
+      }
+    ]
+  }
+}
